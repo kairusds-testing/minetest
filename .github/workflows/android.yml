@@ -10,18 +10,10 @@ on:
       - 'src/**.cpp'
       - 'android/**'
       - '.github/workflows/android.yml'
-  pull_request:
-    paths:
-      - 'lib/**.[ch]'
-      - 'lib/**.cpp'
-      - 'src/**.[ch]'
-      - 'src/**.cpp'
-      - 'android/**'
-      - '.github/workflows/android.yml'
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Install deps
@@ -29,7 +21,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y --no-install-recommends gettext openjdk-11-jdk-headless
     - name: Build with Gradle
-      run: cd android; ./gradlew assemblerelease
+      run: cd android; ./gradlew assembleRelease
     - name: Save armeabi artifact
       uses: actions/upload-artifact@v3
       with:
